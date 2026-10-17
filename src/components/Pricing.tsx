@@ -71,7 +71,7 @@ export default function Pricing() {
                   transition={{ duration: 0.4, delay: i * 0.08 }}
                   className={`card-glow relative flex flex-col rounded-2xl border p-7 ${
                     featured
-                      ? "border-gold bg-gradient-to-b from-ink-600 to-ink-800 shadow-[0_0_50px_-12px_rgba(253,218,36,0.35)]"
+                      ? "border-gold bg-gradient-to-b from-ink-600 to-ink-800 shadow-[0_0_50px_-12px_rgba(255,122,26,0.4)]"
                       : "border-line bg-ink-800 hover:border-gold/40"
                   }`}
                 >

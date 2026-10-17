@@ -14,16 +14,16 @@ export default function OGImage() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          background: "#0a0a0d",
+          background: "#080b14",
           position: "relative",
           fontFamily: "sans-serif",
         }}
       >
         {/* tricolor bar */}
         <div style={{ display: "flex", height: 14 }}>
-          <div style={{ flex: 1, background: "#0a0a0d" }} />
-          <div style={{ flex: 1, background: "#fdda24" }} />
-          <div style={{ flex: 1, background: "#ef3340" }} />
+          <div style={{ flex: 1, background: "#ae1c28" }} />
+          <div style={{ flex: 1, background: "#f4f6fb" }} />
+          <div style={{ flex: 1, background: "#21468b" }} />
         </div>
         {/* glow */}
         <div
@@ -34,7 +34,7 @@ export default function OGImage() {
             width: 520,
             height: 520,
             borderRadius: 520,
-            background: "rgba(253,218,36,0.18)",
+            background: "rgba(255,122,26,0.22)",
           }}
         />
         <div
@@ -45,7 +45,7 @@ export default function OGImage() {
             width: 520,
             height: 520,
             borderRadius: 520,
-            background: "rgba(239,51,64,0.16)",
+            background: "rgba(46,123,255,0.20)",
           }}
         />
 
@@ -63,7 +63,7 @@ export default function OGImage() {
               display: "flex",
               alignItems: "center",
               gap: 14,
-              color: "#fdda24",
+              color: "#ff7a1a",
               fontSize: 30,
               fontWeight: 700,
               letterSpacing: 2,
@@ -86,7 +86,7 @@ export default function OGImage() {
           <div
             style={{
               display: "flex",
-              color: "#fdda24",
+              color: "#ff7a1a",
               fontSize: 46,
               fontWeight: 800,
               marginTop: 6,
@@ -104,9 +104,9 @@ export default function OGImage() {
             }}
           >
             <span>55.000+ kanalen</span>
-            <span style={{ color: "#ef3340" }}>•</span>
+            <span style={{ color: "#2e7bff" }}>•</span>
             <span>90.000+ films</span>
-            <span style={{ color: "#ef3340" }}>•</span>
+            <span style={{ color: "#2e7bff" }}>•</span>
             <span>4K kwaliteit</span>
           </div>
         </div>

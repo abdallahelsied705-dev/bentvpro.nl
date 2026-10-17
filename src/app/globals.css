@@ -1,23 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  /* Dutch-market premium palette */
-  --color-ink: #0a0a0d;        /* near-black base */
-  --color-ink-800: #101014;
-  --color-ink-700: #16161c;
-  --color-ink-600: #1e1e26;
-  --color-line: #2a2a34;
+  /* ── IPTV Nederland palette — Dutch Oranje × deep azure on navy-black ── */
+  --color-ink: #080b14;        /* navy-tinted base */
+  --color-ink-800: #0c111d;
+  --color-ink-700: #121a2b;
+  --color-ink-600: #1a2439;
+  --color-line: #273350;
 
-  --color-gold: #fdda24;       /* accent gold */
-  --color-gold-600: #e6c211;
-  --color-gold-300: #fee97a;
+  /* token name kept as "gold" (components depend on it) — now DUTCH ORANGE */
+  --color-gold: #ff7a1a;
+  --color-gold-600: #ec6708;
+  --color-gold-300: #ffb062;
 
-  --color-red: #ef3340;        /* accent red */
-  --color-red-600: #d51f2c;
-  --color-red-300: #ff6b75;
+  /* token name kept as "red" — now AZURE BLUE */
+  --color-red: #2e7bff;
+  --color-red-600: #1a63e6;
+  --color-red-300: #86b4ff;
 
-  --color-cloud: #ecedf2;      /* text */
-  --color-muted: #9a9aa8;
+  --color-cloud: #eef1f8;      /* text */
+  --color-muted: #94a0ba;
 
   --font-sans: var(--font-lato), system-ui, sans-serif;
   --font-display: var(--font-roboto), system-ui, sans-serif;
@@ -28,37 +30,42 @@
   --animate-shimmer: shimmer 2.6s linear infinite;
   --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-gradient: gradient-pan 12s ease infinite;
+  --animate-aurora: aurora 18s ease infinite;
+  --animate-spin-slow: spin-slow 26s linear infinite;
+  --animate-blob: blob 20s ease-in-out infinite;
+  --animate-border-pan: border-pan 6s linear infinite;
+  --animate-text-sheen: text-sheen 7s ease infinite;
+  --animate-bob: bob 5.5s ease-in-out infinite;
 }
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-@keyframes marquee-rev {
-  from { transform: translateX(-50%); }
-  to { transform: translateX(0); }
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
-}
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes marquee-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+@keyframes bob { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-9px) rotate(1.5deg); } }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 @keyframes pulse-ring {
   0% { transform: scale(0.9); opacity: 0.7; }
   70% { transform: scale(1.6); opacity: 0; }
   100% { transform: scale(1.6); opacity: 0; }
 }
-@keyframes gradient-pan {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+@keyframes gradient-pan { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes aurora {
+  0%   { background-position: 0% 50%, 100% 50%, 50% 0%; }
+  50%  { background-position: 100% 50%, 0% 50%, 50% 100%; }
+  100% { background-position: 0% 50%, 100% 50%, 50% 0%; }
 }
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(24px, -30px) scale(1.12); }
+  66% { transform: translate(-22px, 18px) scale(0.92); }
+}
+@keyframes border-pan { to { background-position: 200% center; } }
+@keyframes text-sheen { 0%, 100% { background-position: 0% center; } 50% { background-position: 100% center; } }
 
 :root {
-  --background: #0a0a0d;
-  --foreground: #ecedf2;
+  --background: #080b14;
+  --foreground: #eef1f8;
 }
 
 html { scroll-behavior: smooth; }
@@ -72,17 +79,19 @@ body {
   position: relative;
 }
 
-/* Lit background so the page never reads as a flat black void */
+/* Animated aurora field so the page reads as alive, never a flat void */
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
+  inset: -20%;
   z-index: -2;
   pointer-events: none;
   background:
-    radial-gradient(48% 38% at 12% 6%, rgba(253, 218, 36, 0.10), transparent 60%),
-    radial-gradient(42% 38% at 88% 14%, rgba(239, 51, 64, 0.10), transparent 58%),
-    radial-gradient(55% 45% at 50% 96%, rgba(253, 218, 36, 0.06), transparent 62%);
+    radial-gradient(42% 36% at 15% 8%, rgba(255, 122, 26, 0.16), transparent 60%),
+    radial-gradient(42% 38% at 88% 12%, rgba(46, 123, 255, 0.16), transparent 58%),
+    radial-gradient(50% 42% at 50% 100%, rgba(255, 122, 26, 0.08), transparent 64%);
+  background-size: 180% 180%, 180% 180%, 160% 160%;
+  animation: var(--animate-aurora);
 }
 body::after {
   content: "";
@@ -91,11 +100,11 @@ body::after {
   z-index: -1;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(134, 180, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(134, 180, 255, 0.045) 1px, transparent 1px);
   background-size: 56px 56px;
-  -webkit-mask-image: radial-gradient(circle at 50% 20%, #000, transparent 78%);
-  mask-image: radial-gradient(circle at 50% 20%, #000, transparent 78%);
+  -webkit-mask-image: radial-gradient(circle at 50% 18%, #000, transparent 78%);
+  mask-image: radial-gradient(circle at 50% 18%, #000, transparent 78%);
 }
 
 /* CSS reveal — visible by default, animates in on load, never stays hidden */
@@ -103,9 +112,7 @@ body::after {
   from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: none; }
 }
-.reveal {
-  animation: reveal-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
+.reveal { animation: reveal-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 .stagger > *:nth-child(2) { animation-delay: 0.07s; }
 .stagger > *:nth-child(3) { animation-delay: 0.14s; }
 .stagger > *:nth-child(4) { animation-delay: 0.21s; }
@@ -115,7 +122,7 @@ body::after {
 .stagger > *:nth-child(8) { animation-delay: 0.49s; }
 
 /* Alternating section band for visual rhythm */
-.band { background: linear-gradient(180deg, rgba(22, 22, 28, 0.55), rgba(16, 16, 20, 0.55)); border-block: 1px solid rgba(42, 42, 52, 0.6); }
+.band { background: linear-gradient(180deg, rgba(18, 26, 43, 0.6), rgba(12, 17, 29, 0.6)); border-block: 1px solid rgba(39, 51, 80, 0.6); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -128,36 +135,37 @@ body::after {
 
 .container-x { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: 1.25rem; }
 
-/* Belgian tri-color bar — black · gold · red */
+/* Dutch tri-color bar — red · white · blue (official-ish) */
 .tricolor-bar {
   height: 5px;
   position: relative;
   background: linear-gradient(
     90deg,
-    #4a4a55 0 33.33%,          /* visible charcoal-black stripe */
-    var(--color-gold) 33.33% 66.66%,
-    var(--color-red) 66.66% 100%
+    #ae1c28 0 33.33%,
+    #f4f6fb 33.33% 66.66%,
+    #21468b 66.66% 100%
   );
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
 }
-/* subtle depth on the black stripe + crisp seams between stripes */
 .tricolor-bar::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(0, 0, 0, 0.35)) left / 33.33% 100% no-repeat,
-    linear-gradient(90deg, transparent calc(33.33% - 1px), rgba(0, 0, 0, 0.55) 33.33%, transparent calc(33.33% + 1px)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.3)),
+    linear-gradient(90deg, transparent calc(33.33% - 1px), rgba(0, 0, 0, 0.5) 33.33%, transparent calc(33.33% + 1px)),
     linear-gradient(90deg, transparent calc(66.66% - 1px), rgba(0, 0, 0, 0.35) 66.66%, transparent calc(66.66% + 1px));
 }
 
-/* Gradient text */
+/* Animated gradient text (orange → azure sheen) */
 .text-flag {
-  background: linear-gradient(100deg, var(--color-gold) 0%, var(--color-gold-300) 40%, var(--color-red) 100%);
+  background: linear-gradient(100deg, var(--color-gold) 0%, var(--color-gold-300) 35%, var(--color-red-300) 70%, var(--color-red) 100%);
+  background-size: 220% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: var(--animate-text-sheen);
 }
 
 /* Shimmer highlight for CTA */
@@ -171,14 +179,65 @@ body::after {
   pointer-events: none;
 }
 
+/* Card hover: lift + animated glow ring */
 .card-glow {
   position: relative;
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s, box-shadow 0.35s;
 }
-.card-glow:hover { transform: translateY(-6px); }
+.card-glow::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(130deg, rgba(255,122,26,0.55), rgba(46,123,255,0.55));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+.card-glow:hover { transform: translateY(-7px); box-shadow: 0 24px 50px -24px rgba(46, 123, 255, 0.45); }
+.card-glow:hover::after { opacity: 1; }
+
+/* Animated gradient border wrapper (for hero frame / featured plan / CTA) */
+.gradient-border {
+  position: relative;
+  border-radius: 1.5rem;
+  background: var(--color-ink-800);
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-red-300), var(--color-red), var(--color-gold));
+  background-size: 300% 100%;
+  animation: var(--animate-border-pan);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Glass surface */
+.glass { background: rgba(18, 26, 43, 0.55); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+
+/* Conic glow blob used behind the hero */
+.conic-glow {
+  background: conic-gradient(from 0deg, rgba(255,122,26,0.0), rgba(255,122,26,0.5), rgba(46,123,255,0.5), rgba(255,122,26,0.0));
+  filter: blur(46px);
+  animation: var(--animate-spin-slow);
+}
+
+/* Subtle 3D tilt on hover for interactive cards */
+.tilt { transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); transform-style: preserve-3d; }
+.tilt:hover { transform: perspective(900px) rotateX(3deg) rotateY(-3deg) translateY(-4px); }
 
 /* Article prose */
-.prose-iptv { line-height: 1.78; color: #cfd0da; }
+.prose-iptv { line-height: 1.78; color: #cfd4e2; }
 .prose-iptv h1, .prose-iptv h2, .prose-iptv h3, .prose-iptv h4 { color: #fff; font-family: var(--font-display); font-weight: 800; line-height: 1.25; margin: 1.6em 0 0.6em; }
 .prose-iptv h1 { font-size: 2rem; } .prose-iptv h2 { font-size: 1.6rem; }
 .prose-iptv h3 { font-size: 1.3rem; } .prose-iptv h4 { font-size: 1.1rem; }
@@ -200,4 +259,4 @@ body::after {
 .prose-iptv table { width: 100%; border-collapse: collapse; margin: 1.6em 0; font-size: 0.95rem; }
 .prose-iptv th, .prose-iptv td { border: 1px solid var(--color-line); padding: 0.65em 0.85em; text-align: left; }
 .prose-iptv th { background: var(--color-ink-600); color: var(--color-gold); }
-.prose-iptv blockquote { border-left: 4px solid var(--color-red); padding-left: 1rem; color: #b8b8c6; font-style: italic; margin: 1.2em 0; }
+.prose-iptv blockquote { border-left: 4px solid var(--color-red); padding-left: 1rem; color: #b8c0d4; font-style: italic; margin: 1.2em 0; }

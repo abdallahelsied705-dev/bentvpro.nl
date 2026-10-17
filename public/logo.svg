@@ -1,19 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="560" height="150" viewBox="0 0 560 150" role="img" aria-label="IPTV Nederland">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#fee97a"/>
-      <stop offset="0.5" stop-color="#fdda24"/>
-      <stop offset="1" stop-color="#e6c211"/>
+      <stop offset="0" stop-color="#ffb062"/>
+      <stop offset="0.5" stop-color="#ff7a1a"/>
+      <stop offset="1" stop-color="#ec6708"/>
     </linearGradient>
   </defs>
   <!-- play badge -->
-  <rect x="8" y="23" width="104" height="104" rx="26" fill="#101014" stroke="#2a2a34" stroke-width="2"/>
-  <rect x="30" y="38" width="60" height="8" rx="4" fill="#22222c"/>
-  <rect x="30" y="38" width="20" height="8" fill="#ef3340"/>
+  <rect x="8" y="23" width="104" height="104" rx="26" fill="#0c111d" stroke="#273350" stroke-width="2"/>
+  <rect x="30" y="38" width="60" height="8" rx="4" fill="#1a2439"/>
+  <rect x="30" y="38" width="20" height="8" fill="#ae1c28"/>
   <rect x="50" y="38" width="20" height="8" fill="#ffffff"/>
-  <rect x="70" y="38" width="20" height="8" fill="#2a5bd7"/>
+  <rect x="70" y="38" width="20" height="8" fill="#21468b"/>
   <path d="M48 62 L86 84 L48 106 Z" fill="url(#g)"/>
   <!-- wordmark -->
   <text x="130" y="78" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="900" fill="url(#g)" letter-spacing="1">IPTV</text>
-  <text x="130" y="120" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="800" fill="#ecedf2" letter-spacing="3">NEDERLAND</text>
+  <text x="130" y="120" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="800" fill="#2e7bff" letter-spacing="3">NEDERLAND</text>
 </svg>

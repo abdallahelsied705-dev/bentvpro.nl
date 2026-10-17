@@ -46,21 +46,23 @@ export default function Home() {
       <Pricing />
       <Marquee />
 
-      {/* Stats */}
+      {/* Stats — single glass bar with animated gradient border */}
       <section className="py-16">
         <div className="container-x">
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {stats.map((s, i) => (
-              <Reveal key={s.label} dir="up" delay={i * 0.08}>
-                <div className="rounded-2xl border border-line bg-ink-800 p-6 text-center">
-                  <p className="font-display text-3xl font-black text-flag sm:text-4xl">
-                    <CountUp to={s.to} suffix={s.suffix} />
-                  </p>
-                  <p className="mt-1 text-sm text-muted">{s.label}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal>
+            <div className="gradient-border glass overflow-hidden">
+              <div className="grid grid-cols-2 divide-line md:grid-cols-4 md:divide-x">
+                {stats.map((s) => (
+                  <div key={s.label} className="group p-7 text-center transition-colors hover:bg-white/[0.03]">
+                    <p className="font-display text-3xl font-black text-flag sm:text-4xl">
+                      <CountUp to={s.to} suffix={s.suffix} />
+                    </p>
+                    <p className="mt-1 text-sm text-muted">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -165,7 +167,7 @@ export default function Home() {
       {/* Guarantee */}
       <section className="py-16">
         <Reveal className="container-x">
-          <div className="relative overflow-hidden rounded-3xl border border-line bg-ink-800 p-10 text-center md:p-14">
+          <div className="gradient-border glass relative overflow-hidden p-10 text-center md:p-14">
             <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-red/10 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-16 -left-16 h-56 w-56 rounded-full bg-gold/10 blur-3xl" />
             <span className="relative text-5xl">🛡️</span>
@@ -337,7 +339,7 @@ export default function Home() {
       {/* Final CTA */}
       <section className="py-16">
         <Reveal className="container-x">
-          <div className="relative overflow-hidden rounded-3xl border border-gold/30 bg-gradient-to-br from-ink-600 via-ink-800 to-ink p-10 text-center md:p-16">
+          <div className="gradient-border relative overflow-hidden bg-gradient-to-br from-ink-600 via-ink-800 to-ink p-10 text-center md:p-16">
             <h2 className="font-display text-3xl font-black text-white sm:text-4xl">
               Klaar voor <span className="text-flag">onbeperkt kijken?</span>
             </h2>
