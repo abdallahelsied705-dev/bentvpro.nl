@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+@theme {
+  /* Dutch-market premium palette */
+  --color-ink: #0a0a0d;        /* near-black base */
+  --color-ink-800: #101014;
+  --color-ink-700: #16161c;
+  --color-ink-600: #1e1e26;
+  --color-line: #2a2a34;
+
+  --color-gold: #fdda24;       /* accent gold */
+  --color-gold-600: #e6c211;
+  --color-gold-300: #fee97a;
+
+  --color-red: #ef3340;        /* accent red */
+  --color-red-600: #d51f2c;
+  --color-red-300: #ff6b75;
+
+  --color-cloud: #ecedf2;      /* text */
+  --color-muted: #9a9aa8;
+
+  --font-sans: var(--font-lato), system-ui, sans-serif;
+  --font-display: var(--font-roboto), system-ui, sans-serif;
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-marquee-rev: marquee-rev 38s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.6s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-gradient: gradient-pan 12s ease infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marquee-rev {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  70% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+@keyframes gradient-pan {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+:root {
+  --background: #0a0a0d;
+  --foreground: #ecedf2;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Lit background so the page never reads as a flat black void */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(48% 38% at 12% 6%, rgba(253, 218, 36, 0.10), transparent 60%),
+    radial-gradient(42% 38% at 88% 14%, rgba(239, 51, 64, 0.10), transparent 58%),
+    radial-gradient(55% 45% at 50% 96%, rgba(253, 218, 36, 0.06), transparent 62%);
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(circle at 50% 20%, #000, transparent 78%);
+  mask-image: radial-gradient(circle at 50% 20%, #000, transparent 78%);
+}
+
+/* CSS reveal — visible by default, animates in on load, never stays hidden */
+@keyframes reveal-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+.reveal {
+  animation: reveal-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.stagger > *:nth-child(2) { animation-delay: 0.07s; }
+.stagger > *:nth-child(3) { animation-delay: 0.14s; }
+.stagger > *:nth-child(4) { animation-delay: 0.21s; }
+.stagger > *:nth-child(5) { animation-delay: 0.28s; }
+.stagger > *:nth-child(6) { animation-delay: 0.35s; }
+.stagger > *:nth-child(7) { animation-delay: 0.42s; }
+.stagger > *:nth-child(8) { animation-delay: 0.49s; }
+
+/* Alternating section band for visual rhythm */
+.band { background: linear-gradient(180deg, rgba(22, 22, 28, 0.55), rgba(16, 16, 20, 0.55)); border-block: 1px solid rgba(42, 42, 52, 0.6); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.container-x { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: 1.25rem; }
+
+/* Belgian tri-color bar — black · gold · red */
+.tricolor-bar {
+  height: 5px;
+  position: relative;
+  background: linear-gradient(
+    90deg,
+    #4a4a55 0 33.33%,          /* visible charcoal-black stripe */
+    var(--color-gold) 33.33% 66.66%,
+    var(--color-red) 66.66% 100%
+  );
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
+}
+/* subtle depth on the black stripe + crisp seams between stripes */
+.tricolor-bar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(0, 0, 0, 0.35)) left / 33.33% 100% no-repeat,
+    linear-gradient(90deg, transparent calc(33.33% - 1px), rgba(0, 0, 0, 0.55) 33.33%, transparent calc(33.33% + 1px)),
+    linear-gradient(90deg, transparent calc(66.66% - 1px), rgba(0, 0, 0, 0.35) 66.66%, transparent calc(66.66% + 1px));
+}
+
+/* Gradient text */
+.text-flag {
+  background: linear-gradient(100deg, var(--color-gold) 0%, var(--color-gold-300) 40%, var(--color-red) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Shimmer highlight for CTA */
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.45) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+  pointer-events: none;
+}
+
+.card-glow {
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s;
+}
+.card-glow:hover { transform: translateY(-6px); }
+
+/* Article prose */
+.prose-iptv { line-height: 1.78; color: #cfd0da; }
+.prose-iptv h1, .prose-iptv h2, .prose-iptv h3, .prose-iptv h4 { color: #fff; font-family: var(--font-display); font-weight: 800; line-height: 1.25; margin: 1.6em 0 0.6em; }
+.prose-iptv h1 { font-size: 2rem; } .prose-iptv h2 { font-size: 1.6rem; }
+.prose-iptv h3 { font-size: 1.3rem; } .prose-iptv h4 { font-size: 1.1rem; }
+.prose-iptv h2, .prose-iptv h3 { position: relative; padding-left: 0.85rem; }
+.prose-iptv h2::before, .prose-iptv h3::before {
+  content: ""; position: absolute; left: 0; top: 0.15em; bottom: 0.15em; width: 4px; border-radius: 4px;
+  background: linear-gradient(var(--color-gold), var(--color-red));
+}
+.prose-iptv p { margin: 0 0 1.1em; }
+.prose-iptv a { color: var(--color-gold); text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s; }
+.prose-iptv a:hover { color: var(--color-red-300); }
+.prose-iptv ul, .prose-iptv ol { margin: 0 0 1.1em 1.4em; }
+.prose-iptv ul { list-style: none; margin-left: 0; }
+.prose-iptv ul li { position: relative; padding-left: 1.6rem; }
+.prose-iptv ul li::before { content: "▸"; position: absolute; left: 0.2rem; color: var(--color-gold); }
+.prose-iptv ol { list-style: decimal; }
+.prose-iptv li { margin: 0.4em 0; }
+.prose-iptv img { border-radius: 14px; margin: 1.6em auto; height: auto; border: 1px solid var(--color-line); }
+.prose-iptv table { width: 100%; border-collapse: collapse; margin: 1.6em 0; font-size: 0.95rem; }
+.prose-iptv th, .prose-iptv td { border: 1px solid var(--color-line); padding: 0.65em 0.85em; text-align: left; }
+.prose-iptv th { background: var(--color-ink-600); color: var(--color-gold); }
+.prose-iptv blockquote { border-left: 4px solid var(--color-red); padding-left: 1rem; color: #b8b8c6; font-style: italic; margin: 1.2em 0; }
